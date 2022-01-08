@@ -1,0 +1,119 @@
+package Views;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+
+public class UserUI extends JFrame {
+	private JPanel contentPane;
+	private JTable table;
+	private JButton btnFind;
+	private JScrollPane scrollPane;
+	private DefaultTableModel tb1Model;
+	private List<String[]> tableData = new ArrayList<String[]>();
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserUI frame = new UserUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	@SuppressWarnings("serial")
+	public UserUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 678, 554);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 136, 662, 218);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"seatid","flight","Seat","Day","Departure","Arrival"
+				}
+			) {
+				@SuppressWarnings("rawtypes")
+				Class[] columnTypes = new Class[] {
+					Object.class,Object.class, Object.class, Object.class, Object.class,Object.class
+				};
+				@SuppressWarnings({ "unchecked", "rawtypes" })
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+				@Override
+			    public boolean isCellEditable(int row, int column) {
+			       return false;
+			    }
+			});
+		
+		contentPane.add(scrollPane);
+		
+		btnFind = new JButton("Find");
+		btnFind.setBounds(0, 74, 173, 45);
+		contentPane.add(btnFind);
+		tb1Model = (DefaultTableModel)table.getModel();
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public void setTb1Model(DefaultTableModel tb1Model) {
+		this.tb1Model = tb1Model;
+	}
+
+	public JButton getBtnFind() {
+		return btnFind;
+	}
+
+	public void setBtnFind(JButton btnFind) {
+		this.btnFind = btnFind;
+	}
+
+	public DefaultTableModel getTb1Model() {
+		return tb1Model;
+	}
+	
+	public List<String[]> getTableData() {
+		return tableData;
+	}
+
+	public void setTableData(List<String[]> tableData) {
+		this.tableData = tableData;
+	}
+}
